@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import com.hotels.registration.model.Account;
 
 public class NewHotelPage {
     private WebDriver driver;
@@ -51,8 +52,12 @@ public class NewHotelPage {
      }
 
      private void typeShortDescription(String shortDescription){
-        driver.findElement(By.id("add_hotel:description")).sendKeys(shortDescription);
+        driver.findElement(By.id("add_hotel:short_description")).sendKeys(shortDescription);
      }
+
+    private void typeDescription(String description){
+        driver.findElement(By.id("add_hotel:description")).sendKeys(description);
+    }
 
      private void clickSave(){
         WebElement element = driver.findElement(By.id("add_hotel:j_idt62"));
@@ -60,7 +65,19 @@ public class NewHotelPage {
      }
 
      private void fillRegistrationForm(Account account){
-        typeNameOfNewHotel(account.getNameOfNewHotel);
+        typeNameOfNewHotel(account.getNameOfNewHotel());
+         selectGlobalRating(account.getGlobalRating());
+         chooseDateOfConstruction(account.getDateOfConstruction());
+         selectCountry(account.getCountry());
+         selectCity(account.getCity());
+         typeShortDescription(account.getShortDescription());
+         typeDescription(account.getDescription());
+     }
+
+     public NewHotelPage fillAndSaveHotelRegistrationForm(Account account){
+        this.fillRegistrationForm(account);
+        this.clickSave();
+        return new NewHotelPage(driver);
      }
 
 

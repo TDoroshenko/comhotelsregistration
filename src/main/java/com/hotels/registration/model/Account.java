@@ -7,17 +7,19 @@ public class Account {
     private String country;
     private String city;
     private String shortDescription;
+    private String description;
 
     public Account() {
     }
 
-    public Account(String nameOfNewHotel, String globalRating, String dateOfConstruction, String country, String city, String shortDescription) {
+    public Account(String nameOfNewHotel, String globalRating, String dateOfConstruction, String country, String city, String shortDescription, String description) {
         this.nameOfNewHotel = nameOfNewHotel;
         this.globalRating = globalRating;
         this.dateOfConstruction = dateOfConstruction;
         this.country = country;
         this.city = city;
         this.shortDescription = shortDescription;
+        this.description = description;
     }
 
     public String getNameOfNewHotel() {
@@ -66,6 +68,14 @@ public class Account {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

@@ -12,6 +12,10 @@ public class MainPage {
     private static final String MAIN_PAGE_URL = "http://localhost:8080/article/faces/welcome.xhtml";
     private static WebDriver driver;
 
+    public MainPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
 
     @FindBy(xpath = "//*[@id=\"header_form:j_idt9\"]/ul/li[1]/a")
     private WebElement article;
@@ -62,6 +66,7 @@ public class MainPage {
     private WebElement editRedo;
 
     Actions actions = new Actions(driver);
+
 
     public MainPage openMainPage() {
         this.driver.navigate().to(MAIN_PAGE_URL);

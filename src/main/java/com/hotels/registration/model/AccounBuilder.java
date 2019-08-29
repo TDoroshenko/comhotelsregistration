@@ -7,6 +7,7 @@ public class AccounBuilder {
     private String country;
     private String city;
     private String shortDescription;
+    private String description;
 
 
     public AccounBuilder withNameOfNewHotel(String nameOfNewHotel){
@@ -34,8 +35,13 @@ public class AccounBuilder {
         return this;
     }
 
+    public AccounBuilder withDescription(String description){
+        this.description = description;
+        return this;
+    }
+
 
     public  Account build(){
-        return new Account(nameOfNewHotel,globalRating,dateOfConstruction,country,city,shortDescription);
+        return new Account(nameOfNewHotel,globalRating,dateOfConstruction,country,city,shortDescription,description);
     }
 }
