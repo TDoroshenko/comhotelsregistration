@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
+import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
 
@@ -14,8 +14,8 @@ public class MainPage {
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
-
 
     @FindBy(xpath = "//*[@id=\"header_form:j_idt9\"]/ul/li[1]/a")
     private WebElement article;
@@ -65,9 +65,6 @@ public class MainPage {
     @FindBy(xpath = "//*[@id=\"header_form:j_idt9\"]/ul/li[2]/ul/li[2]/a/span[2]")
     private WebElement editRedo;
 
-    Actions actions = new Actions(driver);
-
-
     public MainPage openMainPage() {
         this.driver.navigate().to(MAIN_PAGE_URL);
         return this;
@@ -75,12 +72,16 @@ public class MainPage {
 
     public boolean mainPageIsOpened() {
         return this.driver.findElement(By.xpath("//*[@id=\"header_form:j_idt9\"]/ul/li[1]/a/span[2]")).isDisplayed();
+    }
 
-//    public MainPage openCreateNewHotelPage() {
-//        action.moveToElement(newHotel).click().build().perform();
-//        return this;
-//    }
+    public MainPage openRegisterNewHotelPage(){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(article).moveToElement(articleNew).moveToElement(newHotel).click().build().perform();
+        return this;
+    }
 
+    public boolean registerNewHotelPageIsOpened() {
+        return this.driver.findElement(By.id("add_hotel:j_idt40_content")).findElement(By.id("add_hotel:j_idt62")).isDisplayed();
 
     }
 }
