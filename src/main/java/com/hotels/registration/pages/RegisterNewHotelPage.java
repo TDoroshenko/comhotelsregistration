@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class RegisterNewHotelPage {
     private WebDriver driver;
+    Account account = new Account(driver);
 
     public RegisterNewHotelPage(WebDriver driver) {
         this.driver = driver;
@@ -17,20 +18,28 @@ public class RegisterNewHotelPage {
         driver.findElement(By.id("add_hotel:name"));
     }
 
-    private void selectGlobalRating(String globalRating) {
+    boolean selectGlobalRating(String globalRating) {
         if (globalRating.equals("1")) {
-            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(2) > a"));
+            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(2) > a")).click();
+            return driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(2) > a")).isEnabled();
         } else if (globalRating.equals("2")) {
-            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(3) > a"));
+            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(3) > a")).click();
+            return driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(3) > a")).isSelected();
         } else if (globalRating.equals("3")) {
-            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(4) > a"));
+            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(4) > a")).click();
+            return driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(4) > a")).isSelected();
         } else if (globalRating.equals("4")) {
-            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(5) > a"));
+            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(5) > a")).click();
+            return driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(5) > a")).isSelected();
         } else if (globalRating.equals("5")) {
-            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(6) > a"));
+            driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(6) > a")).click();
+            return driver.findElement(By.cssSelector("#add_hotel\\:rate > div:nth-child(6) > a")).isSelected();
         } else {
-            driver.findElement(By.cssSelector("#add_hotel\\:rate > div.ui-rating-cancel > a"));
+            driver.findElement(By.cssSelector("#add_hotel\\:rate > div.ui-rating-cancel > a")).click();
+            return driver.findElement(By.cssSelector("#add_hotel\\:rate > div.ui-rating-cancel > a")).isSelected();
         }
+
+
     }
 
     private void chooseDateOfConstruction(String dateOfConstruction) {
@@ -87,13 +96,6 @@ public class RegisterNewHotelPage {
         return this.driver.findElement(By.xpath("//*[@id=\"add_hotel:j_idt42\"]/span")).isDisplayed();
     }
 
-//    public boolean nameFieldIsEditabale(){
-//        this.driver.findElement(By.id("add_hotel:name")).sendKeys("aaa");
-//        String text = this.driver.findElement(By.id("add_hotel:name")).getAttribute("Text content");
-//        Boolean result = (text.contains("aaa"));
-//        return result;
-//    }
-
     public boolean nameFieldIsEditable() {
         Boolean disabled = Boolean.valueOf(this.driver.findElement(By.id("add_hotel:name")).getAttribute("aria-disabled"));
         Boolean readonly = Boolean.valueOf(this.driver.findElement(By.id("add_hotel:name")).getAttribute("aria-readonly"));
@@ -104,10 +106,93 @@ public class RegisterNewHotelPage {
         }
     }
 
-
-    public void nameFieldCanBeFilledWithAlphanumericCharacters(){
+    public void nameFieldCanBeFilledWithAlphanumericCharacters() {
         this.driver.findElement(By.id("add_hotel:name")).sendKeys("1234567890qwertyuiopasdfghjklzxcvbnm@$#&* {}[],=-().+;'/");
         this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+    }
+
+    public void nameFieldEmptySave() {
+        this.driver.findElement(By.id("add_hotel:name")).sendKeys("");
+        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+    }
+
+    public void nameFieldValidData() {
+        this.driver.findElement(By.id("add_hotel:name")).sendKeys("Rosko");
+        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+    }
+
+    public boolean globalRatingFieldIsPresent() {
+        return this.driver.findElement(By.id("add_hotel:j_idt44")).isDisplayed();
+    }
+//
+//    public globalRatingFieldCanBeFilled() {
+//        int i = 5;
+//        String iString = Integer.toString(i);
+//        while (i < 5) {
+//            selectGlobalRating(iString);
+//            i++;
+//        }
+//        return ;
+//    }
+
+    public boolean dateOfConstructionFieldIsPresent() {
+        return this.driver.findElement(By.id("add_hotel:dateOfConstruction_input")).isDisplayed();
+    }
+
+    public boolean dateOfConstructionFieldIsMarkedWithAsterisk() {
+        return this.driver.findElement(By.xpath("//*[@id=\"add_hotel:j_idt46\"]/span")).isDisplayed();
+    }
+
+    public boolean dateOfConstructionFieldIsEditable() {
+        Boolean disabled = Boolean.valueOf(this.driver.findElement(By.id("add_hotel:dateOfConstruction_input")).getAttribute("aria-disabled"));
+        Boolean readonly = Boolean.valueOf(this.driver.findElement(By.id("add_hotel:dateOfConstruction_input")).getAttribute("aria-readonly"));
+        if (disabled == false && readonly == false) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void dateOfConstructionFieldCanBeFilledWithDateFormat() {
+        this.driver.findElement(By.id("add_hotel:dateOfConstruction_input")).sendKeys("9/4/20");
+        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+    }
+
+    public void dateOfConstructionFieldCanNotBeFilledWithWrongDateFormat() {
+        this.driver.findElement(By.id("add_hotel:dateOfConstruction_input")).sendKeys("2019-05-12");
+        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+    }
+
+    public void dateOfConstructionFieldCanNotBeEmpty() {
+        this.driver.findElement(By.id("add_hotel:dateOfConstruction_input")).sendKeys("");
+        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+    }
+
+    public boolean countryFieldIsPresent() {
+        return this.driver.findElement(By.id("add_hotel:country_label")).isDisplayed();
+    }
+
+    public boolean countryFieldIsMarkedWithAsterisk() {
+        return this.driver.findElement(By.xpath("/#add_hotel\\:j_idt48 > span")).isDisplayed();
+    }
+
+    public boolean countryFieldIsEditable() {
+        Boolean disabled = Boolean.valueOf(this.driver.findElement(By.id("add_hotel:country_label")).getAttribute("aria-disabled"));
+        Boolean readonly = Boolean.valueOf(this.driver.findElement(By.id("add_hotel:country_label")).getAttribute("aria-readonly"));
+        if (disabled == false && readonly == false) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void countryFieldCanNotBeEmptyOrDefault() {
+        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+    }
+
+    public void countryCanBeChecked(){
 
     }
+
+
 }

@@ -18,16 +18,16 @@ public class RegistrationDataProvider {
                         .withShortDescription("not so bad")
                         .withDescription("Or it is..")
                         .build()
-                },
-                {new AccounBuilder()
-                        .withNameOfNewHotel("Grain" + randomInt())
-                        .withGlobalRating("5")
-                        .withDateOfConstruction("6/7/1997")
-                        .withCountry("Ukraine")
-                        .withCity("Odesa")
-                        .withShortDescription("best ever")
-                        .withDescription("Really is.")
-                        .build()
+//                },
+//                {new AccounBuilder()
+//                        .withNameOfNewHotel("Grain" + randomInt())
+//                        .withGlobalRating("5")
+//                        .withDateOfConstruction("6/7/1997")
+//                        .withCountry("Ukraine")
+//                        .withCity("Odesa")
+//                        .withShortDescription("best ever")
+//                        .withDescription("Really is.")
+//                        .build()
                 }
         };
     }

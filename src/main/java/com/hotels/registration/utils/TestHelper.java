@@ -4,6 +4,13 @@ import java.util.Random;
 
 public class TestHelper {
 
+    public static void sleep3Seconds() {
+        try {
+            Thread.sleep(3*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static int randomInt(){
         Random rn = new Random();

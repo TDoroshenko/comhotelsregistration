@@ -1,5 +1,7 @@
 package com.hotels.registration.model;
 
+import org.openqa.selenium.WebDriver;
+
 public class Account {
     private String nameOfNewHotel;
     private String globalRating;
@@ -9,7 +11,7 @@ public class Account {
     private String shortDescription;
     private String description;
 
-    public Account() {
+    public Account(WebDriver driver) {
     }
 
     public Account(String nameOfNewHotel, String globalRating, String dateOfConstruction, String country, String city, String shortDescription, String description) {
