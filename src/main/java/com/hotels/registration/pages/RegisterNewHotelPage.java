@@ -47,9 +47,10 @@ public class RegisterNewHotelPage {
     }
 
     private void selectCountry(String country) {
-        WebElement countryDropdown = driver.findElement(By.id("add_hotel:country_label"));
+        WebElement countryDropdown = driver.findElement(By.cssSelector("#add_hotel\\:country_label"));
         Select value = new Select(countryDropdown);
         value.selectByValue(country);
+
     }
 
 
@@ -67,7 +68,7 @@ public class RegisterNewHotelPage {
         driver.findElement(By.id("add_hotel:description")).sendKeys(description);
     }
 
-    private void clickSave() {
+    void clickSave() {
         WebElement element = driver.findElement(By.id("add_hotel:j_idt62"));
         element.click();
     }
@@ -108,17 +109,17 @@ public class RegisterNewHotelPage {
 
     public void nameFieldCanBeFilledWithAlphanumericCharacters() {
         this.driver.findElement(By.id("add_hotel:name")).sendKeys("1234567890qwertyuiopasdfghjklzxcvbnm@$#&* {}[],=-().+;'/");
-        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+        clickSave();
     }
 
     public void nameFieldEmptySave() {
         this.driver.findElement(By.id("add_hotel:name")).sendKeys("");
-        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+        clickSave();
     }
 
     public void nameFieldValidData() {
         this.driver.findElement(By.id("add_hotel:name")).sendKeys("Rosko");
-        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+        clickSave();
     }
 
     public boolean globalRatingFieldIsPresent() {
@@ -155,17 +156,17 @@ public class RegisterNewHotelPage {
 
     public void dateOfConstructionFieldCanBeFilledWithDateFormat() {
         this.driver.findElement(By.id("add_hotel:dateOfConstruction_input")).sendKeys("9/4/20");
-        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+        clickSave();
     }
 
     public void dateOfConstructionFieldCanNotBeFilledWithWrongDateFormat() {
         this.driver.findElement(By.id("add_hotel:dateOfConstruction_input")).sendKeys("2019-05-12");
-        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+        clickSave();
     }
 
     public void dateOfConstructionFieldCanNotBeEmpty() {
         this.driver.findElement(By.id("add_hotel:dateOfConstruction_input")).sendKeys("");
-        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+        clickSave();
     }
 
     public boolean countryFieldIsPresent() {
@@ -186,13 +187,11 @@ public class RegisterNewHotelPage {
         }
     }
 
-    public void countryFieldCanNotBeEmptyOrDefault() {
-        this.driver.findElement(By.id("add_hotel:j_idt62")).click();
+    public void canSelectCountry(String country){
+        selectCountry(country);
+        clickSave();
     }
 
-    public void countryCanBeChecked(){
-
-    }
 
 
 }

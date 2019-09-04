@@ -180,20 +180,23 @@ public class RegisterNewHotelPageTest {
     }
 
 
-
-
     @Test
     public void checkCountryFieldCanNotBeEmptyOrDefault() {
-        registerNewHotelPage.countryFieldCanNotBeEmptyOrDefault();
+        registerNewHotelPage.clickSave();
         String actualResult = this.driver.findElement(By.cssSelector("#add_hotel\\:j_idt51 > span.ui-message-error-detail")).getText(); ;
         String expectedResult = "Country: Validation Error: Value is required.";
         Assert.assertTrue(actualResult.contains(expectedResult), "If test failed then all date formats are allowed.");
     }
 
 
+    @Test
+    public void checkCountryCanBeChecked() {
+        registerNewHotelPage.canSelectCountry("Ukraine");
+        String actualResult = this.driver.findElement(By.cssSelector("#add_hotel\\:country_label")).getText();
+        String expectedResult = "Ukraine";
+        Assert.assertTrue(actualResult.contains(expectedResult));
 
-
-
+    }
 
 
     @AfterMethod
